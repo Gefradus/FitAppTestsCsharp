@@ -10,6 +10,7 @@ namespace FitnessAppSeleniumTests.pageobjects
     public class ProductPage : BasePage
     {
         private const string ADD_PRODUCT = "addProduct";
+        private const string BACK_TO_MAIN_PAGE = "//a[./img[@id='logoPink']]";
 
         public ManageProductPage AddProduct()
         {
@@ -29,6 +30,12 @@ namespace FitnessAppSeleniumTests.pageobjects
             FindProduct(product);
             int count = FindElements(By.ClassName("tableRow")).Count;
             return count > 0;
+        }
+
+        public MainPage GoBackToMainPage()
+        {
+            JavaScriptClick(By.XPath(BACK_TO_MAIN_PAGE));
+            return new MainPage();
         }
     }
 }

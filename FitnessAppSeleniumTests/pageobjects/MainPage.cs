@@ -1,4 +1,5 @@
 ﻿using FitnessAppSeleniumTests.framework.config;
+using FitnessAppSeleniumTests.pageobjects.admin;
 using OpenQA.Selenium;
 
 namespace FitnessAppSeleniumTests.pageobjects
@@ -6,6 +7,7 @@ namespace FitnessAppSeleniumTests.pageobjects
     public class MainPage : BasePage
     {
         private const string BUTTON_PANEL = "buttonPanel";
+        private const string ADMIN = "adminBtn";
 
         public ProductPage GetProducts()
         {
@@ -13,5 +15,10 @@ namespace FitnessAppSeleniumTests.pageobjects
             return new ProductPage();
         }
 
+        public AdminPage GetAdmin()
+        {
+            Click(By.Id(ADMIN));
+            return new AdminPage();
+        }
     }
 }

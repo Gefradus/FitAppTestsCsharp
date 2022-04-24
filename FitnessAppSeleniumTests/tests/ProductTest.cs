@@ -1,9 +1,7 @@
 ﻿using FitnessAppSeleniumTests.model.entity;
 using FitnessAppSeleniumTests.pageobjects;
+using FitnessAppSeleniumTests.pageobjects.admin;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FitnessAppSeleniumTests.tests
 {
@@ -23,9 +21,25 @@ namespace FitnessAppSeleniumTests.tests
             Assert.True(productPage.ProductExists(product));
         }
 
+        [Test]
         public void EditProduct()
         {
+            AdminProductsPage adminProductsPage = productPage.GoBackToMainPage().GetAdmin().GetProducts();
+            ManageProductPage manageProductPage = adminProductsPage.EditProduct(product);
+            Product editedProduct = ProductDataProvider.EditedProduct();
+            manageProductPage.FillForm(editedProduct);
+            manageProductPage.Submit();
+            adminProductsPage.EditProduct(editedProduct);
+            bool wasProductEdited = manageProductPage.CompareProductDataToObject(editedProduct);
+            if (wasProductEdited) product = editedProduct;
+            Assert.True(wasProductEdited);
+        }
 
+        [TearDown]
+        public void DeleteProduct()
+        {
+            AdminProductsPage adminProductsPage = productPage.GoBackToMainPage().GetAdmin().GetProducts();
+            adminProductsPage.DeleteProduct(product);
         }
     }
 }

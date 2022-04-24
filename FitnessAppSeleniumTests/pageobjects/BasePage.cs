@@ -43,6 +43,11 @@ namespace FitnessAppSeleniumTests.pageobjects
             JavaScriptClick(FindElement(by));
         }
 
+        public string FindElementAndGetValue(By by)
+        {
+            return driver.FindElement(by).GetAttribute("value");
+        }
+
         public void JavaScriptClick(IWebElement element)
         {
             IJavaScriptExecutor executor = (IJavaScriptExecutor) driver;

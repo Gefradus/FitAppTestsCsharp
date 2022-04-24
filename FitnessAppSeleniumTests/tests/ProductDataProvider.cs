@@ -10,6 +10,19 @@ namespace FitnessAppSeleniumTests.tests
             return new Product()
             {
                 Name = StringUtils.RandomEntityName(),
+                Kcal = "100",
+                Proteins = "1",
+                Carbohydrates = "24",
+                Fats = "0"
+            };
+            
+        }
+
+        public static Product EditedProduct()
+        {
+            return new Product()
+            {
+                Name = StringUtils.RandomEntityName(),
                 Kcal = "200",
                 Proteins = "2",
                 Carbohydrates = "48",
@@ -38,7 +51,7 @@ namespace FitnessAppSeleniumTests.tests
                 Sodium = "10",
                 Zinc = "10"
             };
-            
+
         }
     }
 }

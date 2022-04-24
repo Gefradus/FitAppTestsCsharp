@@ -1,5 +1,4 @@
-﻿using FitnessAppSeleniumTests.framework.config;
-using FitnessAppSeleniumTests.model.entity;
+﻿using FitnessAppSeleniumTests.model.entity;
 using OpenQA.Selenium;
 
 namespace FitnessAppSeleniumTests.pageobjects
@@ -44,7 +43,9 @@ namespace FitnessAppSeleniumTests.pageobjects
             FillField(By.Id(PROTEINS), p.Proteins);
             FillField(By.Id(FATS), p.Fats);
             FillField(By.Id(CARBS), p.Carbohydrates);
+
             Click(By.Id(MORE_INFO_BTN));
+
             FillField(By.Id(VIT_A), p.VitaminA);
             FillField(By.Id(VIT_B1), p.VitaminB1);
             FillField(By.Id(VIT_B2), p.VitaminB2);
@@ -68,6 +69,45 @@ namespace FitnessAppSeleniumTests.pageobjects
             FillField(By.Id(SODIUM), p.Sodium);
             FillField(By.Id(CALCIUM), p.Calcium);
             FillField(By.Id(IRON), p.Iron);
+        }
+
+        public bool CompareProductDataToObject(Product product)
+        {
+            bool basicDataCompatible = 
+                FindElementAndGetValue(By.Id(PRODUCT_NAME)).Equals(product.Name) &&
+                FindElementAndGetValue(By.Id(KCAL)).Equals(product.Kcal) &&
+                FindElementAndGetValue(By.Id(PROTEINS)).Equals(product.Proteins) &&
+                FindElementAndGetValue(By.Id(FATS)).Equals(product.Fats) &&
+                FindElementAndGetValue(By.Id(CARBS)).Equals(product.Carbohydrates);
+
+            Click(By.Id(MORE_INFO_BTN));
+
+            bool moreInfoCompatible = 
+                FindElementAndGetValue(By.Id(VIT_A)).Equals(product.VitaminA) &&
+                FindElementAndGetValue(By.Id(VIT_B1)).Equals(product.VitaminB1) &&
+                FindElementAndGetValue(By.Id(VIT_B2)).Equals(product.VitaminB2) &&
+                FindElementAndGetValue(By.Id(VIT_B5)).Equals(product.VitaminB5) &&
+                FindElementAndGetValue(By.Id(VIT_B6)).Equals(product.VitaminB6) &&
+                FindElementAndGetValue(By.Id(BIOTIN)).Equals(product.Biotin) &&
+                FindElementAndGetValue(By.Id(FOLIC_ACID)).Equals(product.FolicAcid) &&
+                FindElementAndGetValue(By.Id(VIT_B12)).Equals(product.VitaminB12) &&
+                FindElementAndGetValue(By.Id(VIT_C)).Equals(product.VitaminC) &&
+                FindElementAndGetValue(By.Id(VIT_D)).Equals(product.VitaminD) &&
+                FindElementAndGetValue(By.Id(VIT_E)).Equals(product.VitaminE) &&
+                FindElementAndGetValue(By.Id(VIT_PP)).Equals(product.VitaminPP) &&
+                FindElementAndGetValue(By.Id(VIT_K)).Equals(product.VitaminK) &&
+                FindElementAndGetValue(By.Id(ZINC)).Equals(product.Zinc) &&
+                FindElementAndGetValue(By.Id(PHOSPHORUS)).Equals(product.Phosphorus) &&
+                FindElementAndGetValue(By.Id(IODINE)).Equals(product.Iodine) &&
+                FindElementAndGetValue(By.Id(MAGNESIUM)).Equals(product.Magnesium) &&
+                FindElementAndGetValue(By.Id(COPPER)).Equals(product.Copper) &&
+                FindElementAndGetValue(By.Id(POTASSIUM)).Equals(product.Potassium) &&
+                FindElementAndGetValue(By.Id(SELENIUM)).Equals(product.Selenium) &&
+                FindElementAndGetValue(By.Id(SODIUM)).Equals(product.Sodium) &&
+                FindElementAndGetValue(By.Id(CALCIUM)).Equals(product.Calcium) &&
+                FindElementAndGetValue(By.Id(IRON)).Equals(product.Iron);
+
+            return basicDataCompatible && moreInfoCompatible;
         }
 
         public ProductPage Submit()
