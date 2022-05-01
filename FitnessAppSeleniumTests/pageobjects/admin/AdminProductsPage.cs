@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace FitnessAppSeleniumTests.pageobjects.admin
 {
-    public class AdminProductsPage : BasePage
+    public class AdminProductsPage : BaseFitAppPage
     {
         private const string SEARCH = "search";
         private const string EDIT_PRODUCT = "editProduct";

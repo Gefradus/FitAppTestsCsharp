@@ -3,7 +3,7 @@ using FitnessAppSeleniumTests.framework.config;
 
 namespace FitnessAppSeleniumTests.pageobjects
 {
-    public class LoginPage : BasePage
+    public class LoginPage : BaseFitAppPage
     {
         private const string LOG_SIDE = "logSide";
         private const string PASSWORD = "Password";
@@ -14,6 +14,7 @@ namespace FitnessAppSeleniumTests.pageobjects
         public void LogIn()
         {
             IWebElement logSide = Config.GetDriver().FindElement(By.Id(LOG_SIDE));
+            WaitForElementToBeClickable(logSide);
             logSide.FindElement(By.Id(LOGIN_OR_EMAIL)).SendKeys(ADMIN);
             logSide.FindElement(By.Id(PASSWORD)).SendKeys(ADMIN);
             JavaScriptClick(logSide.FindElement(By.CssSelector(SUBMIT)));

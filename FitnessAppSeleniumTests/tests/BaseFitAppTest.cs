@@ -7,9 +7,9 @@ namespace FitnessAppSeleniumTests.tests
 {
     public class BaseFitAppTest
     {
-        private const string URL = "https://localhost:44315/";
+        private const string URL = "http://localhost:5000";
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUpBeforeTest()
         {
             Config.GetDriver().Navigate().GoToUrl(URL);
@@ -17,7 +17,7 @@ namespace FitnessAppSeleniumTests.tests
             loginPage.LogIn();
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             Config.GetDriver().Quit();

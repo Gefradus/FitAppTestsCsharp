@@ -2,7 +2,7 @@
 
 namespace FitnessAppSeleniumTests.pageobjects.admin
 {
-    public class AdminPage : BasePage
+    public class AdminPage : BaseFitAppPage
     {
         private const string PRODUCTS = "a[href='/Admin/AdminProduct']";
 

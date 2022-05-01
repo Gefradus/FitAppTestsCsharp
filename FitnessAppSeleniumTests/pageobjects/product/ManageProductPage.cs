@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace FitnessAppSeleniumTests.pageobjects
 {
-    public class ManageProductPage : BasePage
+    public class ManageProductPage : BaseFitAppPage
     {
         private const string PRODUCT_NAME = "ProductName";
         private const string KCAL = "Calories";

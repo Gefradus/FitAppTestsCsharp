@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FitnessAppSeleniumTests.pageobjects
 {
-    public class ProductPage : BasePage
+    public class ProductPage : BaseFitAppPage
     {
         private const string ADD_PRODUCT = "addProduct";
         private const string BACK_TO_MAIN_PAGE = "//a[./img[@id='logoPink']]";

@@ -1,11 +1,19 @@
 ﻿using FitnessAppSeleniumTests.framework.config;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FitnessAppSeleniumTests.pageobjects
 {
-    public class BasePage
+    public class BaseFitAppPage
     {
+        public BaseFitAppPage() {
+            WaitForPageLoaded();
+        }
+
         readonly static IWebDriver driver = Config.GetDriver();
 
         public void FillField(By by, string data)
@@ -17,6 +25,19 @@ namespace FitnessAppSeleniumTests.pageobjects
                 field.Clear();
                 field.SendKeys(data);
             }
+        }
+
+        public void WaitForPageLoaded()
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(d => d.FindElement(By.TagName("body")).GetAttribute("class").Contains("loaded"));
+            Thread.Sleep(250);
+        }
+
+        public void WaitForElementToBeClickable(IWebElement element)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
         public void Click(By by)
@@ -33,7 +54,7 @@ namespace FitnessAppSeleniumTests.pageobjects
             return driver.FindElement(by);
         }
 
-        public static IReadOnlyCollection<IWebElement> FindElements(By by)
+        public static IList<IWebElement> FindElements(By by)
         {
             return driver.FindElements(by);
         }

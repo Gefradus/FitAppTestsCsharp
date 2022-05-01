@@ -10,7 +10,7 @@ namespace FitnessAppSeleniumTests.tests
         private Product product;
         private ProductPage productPage;
 
-        [Test]
+        [Test, Order(1)]
         public void AddProduct()
         {
             product = ProductDataProvider.Product();
@@ -21,7 +21,7 @@ namespace FitnessAppSeleniumTests.tests
             Assert.True(productPage.ProductExists(product));
         }
 
-        [Test]
+        [Test, Order(2)]
         public void EditProduct()
         {
             AdminProductsPage adminProductsPage = productPage.GoBackToMainPage().GetAdmin().GetProducts();
@@ -35,7 +35,7 @@ namespace FitnessAppSeleniumTests.tests
             Assert.True(wasProductEdited);
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void DeleteProduct()
         {
             AdminProductsPage adminProductsPage = productPage.GoBackToMainPage().GetAdmin().GetProducts();
