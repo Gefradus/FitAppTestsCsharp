@@ -2,9 +2,6 @@
 using FitnessAppSeleniumTests.pageobjects;
 using FitnessAppSeleniumTests.pageobjects.training.strengthTraining;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FitnessAppSeleniumTests.tests.strengthTraining
 {
@@ -17,7 +14,35 @@ namespace FitnessAppSeleniumTests.tests.strengthTraining
         [Test, Order(1)]
         public void AddStrengthTraining()
         {
-            this.strengthTraining = 
+            strengthTraining = StrengthTrainingDataProvider.StrengthTraining();
+            strengthTrainingTypePage = new MainPage().GetTrainings().AddStrengthTraining();
+            ManageStrengthTrainingTypePage manageStrengthTrainingTypePage = strengthTrainingTypePage.AddStrengthTrainingType();
+            manageStrengthTrainingTypePage.FillForm(strengthTraining);
+            trainingPage = manageStrengthTrainingTypePage.Submit();
+            Assert.True(trainingPage.StrengthTrainingExists(strengthTraining));
+        }
+
+        [Test, Order(2)]
+        public void EditStrengthTraining()
+        {
+            ManageStrengthTrainingPage manageStrengthTrainingPage = trainingPage.EditStrengthTraining(strengthTraining);
+            StrengthTraining editedStrengthTraining = StrengthTrainingDataProvider.EditedStrengthTraining();
+            trainingPage = manageStrengthTrainingPage.FillFormAndSubmit(editedStrengthTraining);
+            bool trainingExists = trainingPage.StrengthTrainingExists(editedStrengthTraining);
+            if (trainingExists) strengthTraining = editedStrengthTraining;
+            Assert.True(trainingExists);
+        }
+
+        [Test, Order(3)]
+        public void DeleteStrengthTraining()
+        {
+            trainingPage.DeleteStrengthTraining(strengthTraining);
+            Assert.False(trainingPage.StrengthTrainingExists(strengthTraining));
+        }
+
+        public void DeleteStrengthTrainingType()
+        {
+
         }
     }
 }

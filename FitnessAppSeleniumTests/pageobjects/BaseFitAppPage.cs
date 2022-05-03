@@ -30,7 +30,7 @@ namespace FitnessAppSeleniumTests.pageobjects
         public void WaitForPageLoaded()
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            wait.Until(d => d.FindElement(By.TagName("body")).GetAttribute("class").Contains("loaded"));
+            wait.Until(ContainsAtrribute(By.TagName("body"), "class", "loaded"));
             Thread.Sleep(250);
         }
 
@@ -38,6 +38,25 @@ namespace FitnessAppSeleniumTests.pageobjects
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementToBeClickable(element));
+        }
+
+        public static Func<IWebDriver, string> ContainsAtrribute(By locator, string attribute, string notValue)
+        {
+            return (driver) => {
+                try
+                {
+                    var value = driver.FindElement(locator).GetAttribute(attribute);
+                    return value.Contains(notValue) ? value : null;
+                }
+                catch (NoSuchElementException)
+                {
+                    return null;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            };
         }
 
         public void Click(By by)

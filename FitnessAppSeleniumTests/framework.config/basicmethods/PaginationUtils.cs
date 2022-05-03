@@ -51,14 +51,15 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
         private static IList<IWebElement> GetPaginationButtons(IWebElement paginationContainer)
         {
             IList<IWebElement> elements = paginationContainer.FindElements(By.CssSelector(PAGINATION_LI));
-            
+            IList<IWebElement> elements_enabled = new List<IWebElement>();
+
             foreach(IWebElement element in elements) {
-                if (element.GetAttribute(CLASS).Contains(DISABLED)) {
-                    elements.Remove(element);
+                if (!element.GetAttribute(CLASS).Contains(DISABLED)) {
+                    elements_enabled.Add(element);
                 }
             }
 
-            return elements;
+            return elements_enabled;
         }
 
         public static void GoBackToFirstPage()
@@ -114,13 +115,15 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
         private static IList<IWebElement> GetNextPageButtons(IWebElement paginationContainer)
         {
             IList<IWebElement> nextPageButtons = paginationContainer.FindElements(By.ClassName(NEXT_PAGE));
+            IList<IWebElement> nextPageButtonsEnabled = new List<IWebElement>();
+
             foreach (IWebElement element in nextPageButtons) {
-                if (element.GetAttribute(CLASS).Contains(DISABLED)) {
-                    nextPageButtons.Remove(element);
+                if (!element.GetAttribute(CLASS).Contains(DISABLED)) {
+                    nextPageButtonsEnabled.Add(element);
                 }
             }
             
-            return nextPageButtons;
+            return nextPageButtonsEnabled;
         }
 
         private static IList<IWebElement> GetNextPageButtons()

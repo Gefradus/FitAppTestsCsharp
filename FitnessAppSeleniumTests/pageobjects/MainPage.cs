@@ -1,5 +1,4 @@
-﻿using FitnessAppSeleniumTests.framework.config;
-using FitnessAppSeleniumTests.pageobjects.admin;
+﻿using FitnessAppSeleniumTests.pageobjects.admin;
 using OpenQA.Selenium;
 
 namespace FitnessAppSeleniumTests.pageobjects
@@ -9,6 +8,7 @@ namespace FitnessAppSeleniumTests.pageobjects
         private const string BUTTON_PANEL = "buttonPanel";
         private const string ADMIN = "adminBtn";
         private const string MEASUREMENT = "a[href='/Measurements']";
+        private const string TRAINING = "a[href='/Training']";
 
         public ProductPage GetProducts()
         {
@@ -20,6 +20,12 @@ namespace FitnessAppSeleniumTests.pageobjects
         {
             Click(By.CssSelector(MEASUREMENT));
             return new MeasurementPage();   
+        }
+
+        public TrainingPage GetTrainings()
+        {
+            Click(By.CssSelector(TRAINING));
+            return new TrainingPage();
         }
 
         public AdminPage GetAdmin()

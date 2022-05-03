@@ -16,9 +16,9 @@ namespace FitnessAppSeleniumTests.pageobjects.training.cardioTraining
             return new ManageCardioTrainingTypePage();
         }
 
-        public ManageCardioTrainingTypePage AddCardioTraining()
+        /*public ManageCardioTrainingTypePage AddCardioTraining()
         {
 
-        }
+        }*/
     }
 }
