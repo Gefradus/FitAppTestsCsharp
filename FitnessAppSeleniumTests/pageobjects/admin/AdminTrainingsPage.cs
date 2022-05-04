@@ -1,9 +1,7 @@
 ﻿using FitnessAppSeleniumTests.framework.config.basicmethods;
 using FitnessAppSeleniumTests.model.entity;
 using OpenQA.Selenium;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FitnessAppSeleniumTests.pageobjects.admin
 {

@@ -8,7 +8,7 @@ namespace FitnessAppSeleniumTests.tests
     public class ProductTest : BaseFitAppTest
     {
         private Product product;
-        private ProductPage productPage;
+        private ProductsPage productPage;
 
         [Test, Order(1)]
         public void AddProduct()

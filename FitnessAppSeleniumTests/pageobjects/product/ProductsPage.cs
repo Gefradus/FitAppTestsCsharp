@@ -1,16 +1,16 @@
-﻿using FitnessAppSeleniumTests.framework.config;
-using FitnessAppSeleniumTests.model.entity;
+﻿using FitnessAppSeleniumTests.model.entity;
+using FitnessAppSeleniumTests.pageobjects.meal;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FitnessAppSeleniumTests.pageobjects
 {
-    public class ProductPage : BaseFitAppPage
+    public class ProductsPage : BaseFitAppPage
     {
         private const string ADD_PRODUCT = "addProduct";
         private const string BACK_TO_MAIN_PAGE = "//a[./img[@id='logoPink']]";
+        private const string SHOW_MODAL_ADD_MEAL_BTN = "showModalAddMealBtn";
+        private const string TABLE_ROW = "tableRow";
+        private const string SEARCH_INPUT = "searchInput";
 
         public ManageProductPage AddProduct()
         {
@@ -20,15 +20,22 @@ namespace FitnessAppSeleniumTests.pageobjects
 
         private void FindProduct(Product product)
         {
-            By searchInput = By.Id("searchInput");
+            By searchInput = By.Id(SEARCH_INPUT);
             FillField(searchInput, product.Name);
             Submit(searchInput);
+        }
+
+        public MealPage FindProductAndAddMeal(Product product)
+        {
+            FindProduct(product);
+            Click(By.ClassName(SHOW_MODAL_ADD_MEAL_BTN));
+            return new MealPage();
         }
 
         public bool ProductExists(Product product)
         {
             FindProduct(product);
-            int count = FindElements(By.ClassName("tableRow")).Count;
+            int count = FindElements(By.ClassName(TABLE_ROW)).Count;
             return count > 0;
         }
 

@@ -110,10 +110,10 @@ namespace FitnessAppSeleniumTests.pageobjects
             return basicDataCompatible && moreInfoCompatible;
         }
 
-        public ProductPage Submit()
+        public ProductsPage Submit()
         {
             Click(By.CssSelector(SUBMIT));
-            return new ProductPage();
+            return new ProductsPage();
         }
     }
 }
