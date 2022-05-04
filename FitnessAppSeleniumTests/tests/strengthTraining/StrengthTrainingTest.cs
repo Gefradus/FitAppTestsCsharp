@@ -1,5 +1,6 @@
 ﻿using FitnessAppSeleniumTests.model.entity;
 using FitnessAppSeleniumTests.pageobjects;
+using FitnessAppSeleniumTests.pageobjects.admin;
 using FitnessAppSeleniumTests.pageobjects.training.strengthTraining;
 using NUnit.Framework;
 
@@ -40,9 +41,11 @@ namespace FitnessAppSeleniumTests.tests.strengthTraining
             Assert.False(trainingPage.StrengthTrainingExists(strengthTraining));
         }
 
+        [OneTimeTearDown]
         public void DeleteStrengthTrainingType()
         {
-
+            AdminTrainingsPage adminTrainingsPage = strengthTrainingTypePage.GoBackToMainPage().GetAdmin().GetTrainings();
+            adminTrainingsPage.DeleteStrengthTrainingType(strengthTraining.TrainingType);
         }
     }
 }
