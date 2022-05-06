@@ -1,6 +1,7 @@
 ﻿using FitnessAppSeleniumTests.framework.config.basicmethods;
 using FitnessAppSeleniumTests.model.entity;
 using FitnessAppSeleniumTests.pageobjects.admin;
+using FitnessAppSeleniumTests.pageobjects.meal;
 using OpenQA.Selenium;
 using System.Collections.Generic;
 
@@ -14,6 +15,8 @@ namespace FitnessAppSeleniumTests.pageobjects
         private const string TRAINING = "a[href='/Training']";
         private const string PRODUCT = " .product";
         private const string HEADER = "napro";
+        private const string DELETE_BUTTON = "btnUsuEdy";
+        private const string CONFIRM_DELETION = "delete";
         private const char HASH = '#';
         private const char GRAM_UNIT = 'g';
 
@@ -48,6 +51,14 @@ namespace FitnessAppSeleniumTests.pageobjects
             return new AdminPage();
         }
 
+        public MealPage EditMeal(Meal meal)
+        {
+            IWebElement mealRow = FindMeal(meal);
+            mealRow.Click();
+            return new MealPage();
+        }
+
+
         private IWebElement FindMeal(Meal meal)
         {
             IList<IWebElement> rows = FindElements(By.CssSelector(HASH + meal.MealOfTheDay.Value + PRODUCT));
@@ -74,5 +85,16 @@ namespace FitnessAppSeleniumTests.pageobjects
                 return false;
             }
         } 
+
+        public void DeleteMeal(Meal meal)
+        {
+            WaitForPageLoaded();
+            IWebElement mealRow = FindMeal(meal);
+            JavaScriptClick(mealRow.FindElement(By.ClassName(DELETE_BUTTON)));
+            IWebElement confirmDeletion = FindElement(By.Id(CONFIRM_DELETION));
+            WaitForElementToBeClickable(confirmDeletion);
+            confirmDeletion.Click();
+            WaitForPageLoaded();
+        }
     }
 }
