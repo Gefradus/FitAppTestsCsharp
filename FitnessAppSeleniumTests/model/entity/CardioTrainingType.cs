@@ -6,5 +6,7 @@ namespace FitnessAppSeleniumTests.model.entity
 {
     public class CardioTrainingType
     {
+        public string Name { get; set; }
+        public string Expenditure { get; set; }
     }
 }
