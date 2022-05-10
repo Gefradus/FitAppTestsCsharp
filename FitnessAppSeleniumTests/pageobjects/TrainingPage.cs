@@ -102,6 +102,7 @@ namespace FitnessAppSeleniumTests.pageobjects
             IWebElement deleteBtn = FindElement(By.CssSelector(DELETE_CARDIO_BTN));
             WaitForElementToBeClickable(deleteBtn);
             deleteBtn.Click();
+            WaitForPageLoaded();
         } 
 
         public bool VerifyIfCardioDeleted(CardioTraining cardioTraining, int cardioTrainingsSizeBeforeDelete)

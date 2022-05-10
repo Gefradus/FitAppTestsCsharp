@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+
 namespace FitnessAppSeleniumTests.framework.config
 {
     public class Config
@@ -10,7 +11,7 @@ namespace FitnessAppSeleniumTests.framework.config
 
         public static IWebDriver GetDriver()
         {
-            if (Driver == null)
+            if(Driver == null)
                 InitWebDriver();
             return Driver;
         }
@@ -20,6 +21,12 @@ namespace FitnessAppSeleniumTests.framework.config
             Driver = new ChromeDriver(DRIVER_DIRECTORY);
             Driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(5);
             Driver.Manage().Window.Maximize();        
+        }
+
+        public static void CloseDriver()
+        {
+            Driver.Quit();
+            Driver = null;
         }
     }
     

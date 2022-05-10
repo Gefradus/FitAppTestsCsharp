@@ -2,6 +2,7 @@
 using FitnessAppSeleniumTests.pageobjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System;
 
 namespace FitnessAppSeleniumTests.tests
 {
@@ -20,7 +21,8 @@ namespace FitnessAppSeleniumTests.tests
         [OneTimeTearDown]
         public void TearDown()
         {
-            Config.GetDriver().Quit();
+            Config.CloseDriver();
+
         }
     }
 }

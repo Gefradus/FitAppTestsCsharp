@@ -11,10 +11,7 @@ namespace FitnessAppSeleniumTests.pageobjects
     public class BaseFitAppPage
     {
         public BaseFitAppPage() {
-            WaitForPageLoaded();
         }
-
-        readonly static IWebDriver driver = Config.GetDriver();
 
         public void FillField(By by, string data)
         {
@@ -29,14 +26,14 @@ namespace FitnessAppSeleniumTests.pageobjects
 
         public void WaitForPageLoaded()
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(Config.GetDriver(), TimeSpan.FromSeconds(5));
             wait.Until(ContainsAtrribute(By.TagName("body"), "class", "loaded"));
             Thread.Sleep(250);
         }
 
         public void WaitForElementToBeClickable(IWebElement element)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            var wait = new WebDriverWait(Config.GetDriver(), TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
@@ -70,12 +67,12 @@ namespace FitnessAppSeleniumTests.pageobjects
 
         public static IWebElement FindElement(By by)
         {
-            return driver.FindElement(by);
+            return Config.GetDriver().FindElement(by);
         }
 
         public static IList<IWebElement> FindElements(By by)
         {
-            return driver.FindElements(by);
+            return Config.GetDriver().FindElements(by);
         }
 
         public void JavaScriptClick(By by)
@@ -85,12 +82,12 @@ namespace FitnessAppSeleniumTests.pageobjects
 
         public string FindElementAndGetValue(By by)
         {
-            return driver.FindElement(by).GetAttribute("value");
+            return Config.GetDriver().FindElement(by).GetAttribute("value");
         }
 
         public void JavaScriptClick(IWebElement element)
         {
-            IJavaScriptExecutor executor = (IJavaScriptExecutor) driver;
+            IJavaScriptExecutor executor = (IJavaScriptExecutor) Config.GetDriver();
             executor.ExecuteScript("arguments[0].click();", element);
         }
     }

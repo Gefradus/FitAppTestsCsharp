@@ -28,6 +28,7 @@ namespace FitnessAppSeleniumTests.pageobjects.training.cardioTraining
 
         public IWebElement FindCardioTrainingType(CardioTrainingType cardioTrainingType)
         {
+            WaitForPageLoaded();
             FillField(By.Id(SEARCH), cardioTrainingType.Name);
             Submit(By.Id(SEARCH));
             WaitForPageLoaded();
