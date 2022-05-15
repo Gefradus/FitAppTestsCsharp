@@ -1,9 +1,7 @@
 ﻿using FitnessAppSeleniumTests.framework.config.basicmethods;
 using FitnessAppSeleniumTests.model.entity;
 using OpenQA.Selenium;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FitnessAppSeleniumTests.pageobjects.training.cardioTraining
 {
@@ -12,6 +10,7 @@ namespace FitnessAppSeleniumTests.pageobjects.training.cardioTraining
         private const string CREATE_TRAINING = "createTraining";
         private const string SEARCH = "search";
         private const string TRAINING_ROWS = "#trainingPanel .training";
+        private const string BACK_TO_MAIN_PAGE = "//a[./img[@id='logoPink']]";
 
         public ManageCardioTrainingTypePage AddCardioTrainingType()
         {
@@ -52,6 +51,12 @@ namespace FitnessAppSeleniumTests.pageobjects.training.cardioTraining
             {
                 return false;
             }
+        }
+
+        public MainPage GoBackToMainPage()
+        {
+            JavaScriptClick(By.XPath(BACK_TO_MAIN_PAGE));
+            return new MainPage();
         }
     }
 }
