@@ -1,6 +1,7 @@
 ﻿using FitnessAppSeleniumTests.framework.config.basicmethods;
 using FitnessAppSeleniumTests.model.entity;
 using FitnessAppSeleniumTests.pageobjects.admin;
+using FitnessAppSeleniumTests.pageobjects.diet;
 using FitnessAppSeleniumTests.pageobjects.meal;
 using OpenQA.Selenium;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace FitnessAppSeleniumTests.pageobjects
         private const string ADMIN = "adminBtn";
         private const string MEASUREMENT = "a[href='/Measurements']";
         private const string TRAINING = "a[href='/Training']";
+        private const string DIETS = "a[href='/DietCreator/ActiveDiets']";
         private const string PRODUCT = " .product";
         private const string HEADER = "napro";
         private const string DELETE_BUTTON = "btnUsuEdy";
@@ -45,6 +47,12 @@ namespace FitnessAppSeleniumTests.pageobjects
             return new TrainingPage();
         }
 
+        public DietPage GetDiets()
+        {
+            Click(By.CssSelector(DIETS));
+            return new DietPage();
+        }
+
         public AdminPage GetAdmin()
         {
             Click(By.Id(ADMIN));
@@ -61,6 +69,7 @@ namespace FitnessAppSeleniumTests.pageobjects
 
         private IWebElement FindMeal(Meal meal)
         {
+            WaitForPageLoaded();
             IList<IWebElement> rows = FindElements(By.CssSelector(HASH + meal.MealOfTheDay.Value + PRODUCT));
             if (rows.Count > 0)
             {

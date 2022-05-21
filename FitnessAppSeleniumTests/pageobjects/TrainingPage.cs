@@ -112,7 +112,7 @@ namespace FitnessAppSeleniumTests.pageobjects
 
         public IWebElement FindCardioTraining(CardioTraining cardioTraining)
         {
-            PaginationUtils.GoToLastPage(FindElement(By.Id(CARDIO_PAGINATION)));
+            PaginationUtils.GoToLastPage(By.Id(CARDIO_PAGINATION));
             IWebElement lastRow = GetLastCardioRow();
             string lastRowName = lastRow.FindElement(By.ClassName(NAME)).Text.Trim();
             string lastRowKcalBurned = lastRow.FindElement(By.ClassName(KCAL_BURNED)).Text.Trim();

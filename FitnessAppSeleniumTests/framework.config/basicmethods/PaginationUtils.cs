@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FitnessAppSeleniumTests.framework.config.basicmethods
 {
@@ -17,13 +18,9 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
             return SearchContextUtil.FindElement(By.TagName(HTML));
         }
 
-        public static void GoToLastPage()
+        public static void GoToLastPage(By paginationContainerBy)
         {
-            GoToLastPage(WholePage());
-        }
-
-        public static void GoToLastPage(IWebElement paginationContainer)
-        {
+            IWebElement paginationContainer = Config.GetDriver().FindElement(paginationContainerBy);
             while (HasViewNextPage(paginationContainer))
             {
                 if (IsPaginationActive(paginationContainer))
@@ -42,6 +39,25 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
             }
         }
 
+        public static void GoToLastPage()
+        {
+            while (HasViewNextPage(WholePage()))
+            {
+                if (IsPaginationActive(WholePage()))
+                {
+                    IList<IWebElement> elements = GetPaginationButtons(WholePage());
+                    IWebElement penultimateElement = elements[elements.Count - 2];
+                    if (ACTIVE.Equals(penultimateElement.GetAttribute(CLASS)))
+                    {
+                        GetLastPage(WholePage()).Click();
+                    }
+                    else
+                    {
+                        penultimateElement.Click();
+                    }
+                }
+            }
+        }
 
         public static bool IsPaginationActive(IWebElement paginationContainer)
         {
@@ -61,6 +77,23 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
 
             return elements_enabled;
         }
+
+        private static IList<IWebElement> GetPaginationButtons()
+        {
+            IList<IWebElement> elements = SearchContextUtil.FindElement(By.TagName(HTML)).FindElements(By.CssSelector(PAGINATION_LI));
+            IList<IWebElement> elements_enabled = new List<IWebElement>();
+
+            foreach (IWebElement element in elements)
+            {
+                if (!element.GetAttribute(CLASS).Contains(DISABLED))
+                {
+                    elements_enabled.Add(element);
+                }
+            }
+
+            return elements_enabled;
+        }
+
 
         public static void GoBackToFirstPage()
         {

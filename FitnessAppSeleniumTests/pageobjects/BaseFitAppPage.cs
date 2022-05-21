@@ -37,6 +37,12 @@ namespace FitnessAppSeleniumTests.pageobjects
             wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
+        public void WaitForElementFoundByToBeClickable(By by)
+        {
+            var wait = new WebDriverWait(Config.GetDriver(), TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementToBeClickable(by));
+        }
+
         public static Func<IWebDriver, string> ContainsAtrribute(By locator, string attribute, string notValue)
         {
             return (driver) => {
@@ -78,6 +84,19 @@ namespace FitnessAppSeleniumTests.pageobjects
         public void JavaScriptClick(By by)
         {
             JavaScriptClick(FindElement(by));
+        }
+
+        public void ClickCheckbox(By checkboxBy, bool value)
+        {
+            ClickCheckbox(FindElement(checkboxBy), value);
+        }
+
+        public void ClickCheckbox(IWebElement checkbox, bool value)
+        {
+            if (checkbox.Selected != value)
+            {
+                JavaScriptClick(checkbox);
+            }
         }
 
         public string FindElementAndGetValue(By by)
