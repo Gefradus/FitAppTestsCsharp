@@ -43,9 +43,9 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
         {
             while (HasViewNextPage(WholePage()))
             {
-                if (IsPaginationActive(WholePage()))
+                if (IsPaginationActive())
                 {
-                    IList<IWebElement> elements = GetPaginationButtons(WholePage());
+                    IList<IWebElement> elements = GetPaginationButtons();
                     IWebElement penultimateElement = elements[elements.Count - 2];
                     if (ACTIVE.Equals(penultimateElement.GetAttribute(CLASS)))
                     {
@@ -64,6 +64,11 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
             return GetPaginationButtons(paginationContainer).Count > 1;
         }
 
+        public static bool IsPaginationActive()
+        {
+            return GetPaginationButtons().Count > 1;
+        }
+
         private static IList<IWebElement> GetPaginationButtons(IWebElement paginationContainer)
         {
             IList<IWebElement> elements = paginationContainer.FindElements(By.CssSelector(PAGINATION_LI));
@@ -80,7 +85,7 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
 
         private static IList<IWebElement> GetPaginationButtons()
         {
-            IList<IWebElement> elements = SearchContextUtil.FindElement(By.TagName(HTML)).FindElements(By.CssSelector(PAGINATION_LI));
+            IList<IWebElement> elements = WholePage().FindElements(By.CssSelector(PAGINATION_LI));
             IList<IWebElement> elements_enabled = new List<IWebElement>();
 
             foreach (IWebElement element in elements)
@@ -93,7 +98,6 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
 
             return elements_enabled;
         }
-
 
         public static void GoBackToFirstPage()
         {

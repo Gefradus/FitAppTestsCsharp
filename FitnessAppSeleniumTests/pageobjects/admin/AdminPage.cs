@@ -9,12 +9,14 @@ namespace FitnessAppSeleniumTests.pageobjects.admin
 
         public AdminProductsPage GetProducts()
         {
+            WaitForPageLoaded();
             Click(By.CssSelector(PRODUCTS));
             return new AdminProductsPage();
         }
 
        public AdminTrainingsPage GetTrainings()
         {
+            WaitForPageLoaded();
             Click(By.CssSelector(TRAININGS));
             return new AdminTrainingsPage();
         }

@@ -5,16 +5,14 @@ namespace FitnessAppSeleniumTests.framework.config.basicmethods
 {
     public class SearchContextUtil
     {
-        private static readonly IWebDriver driver = Config.GetDriver();
-
         public static IWebElement FindElement(By by)
         {
-            return driver.FindElement(by);
+            return Config.GetDriver().FindElement(by);
         }
 
         public static IList<IWebElement> FindElements(By by)
         {
-            return driver.FindElements(by);
+            return Config.GetDriver().FindElements(by);
         }
     }
 }

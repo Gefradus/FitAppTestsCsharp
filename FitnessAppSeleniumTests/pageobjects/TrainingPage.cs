@@ -128,7 +128,7 @@ namespace FitnessAppSeleniumTests.pageobjects
 
         public IWebElement FindStrengthTraining(StrengthTraining strengthTraining)
         {
-            PaginationUtils.GoToLastPage(FindElement(By.Id(STRENGTH_PAGINATION)));
+            PaginationUtils.GoToLastPage(By.Id(STRENGTH_PAGINATION));
             IWebElement lastRow = GetLastStrengthRow();
             string lastRowName = lastRow.FindElement(By.ClassName(NAME)).Text.Trim();
             string lastRowSets = lastRow.FindElement(By.ClassName(SETS)).Text.Trim();
